@@ -91,9 +91,15 @@ export class UserBusiness {
       throw new BadRequestError("'email' ou 'password' incorretos")
     }
 
+    const token = this.tokenManager.createToken({
+      id: userDB.id,
+      name: userDB.name,
+      role: userDB.role
+    })
+
     const output: LoginOutputDTO = {
       message: "Login realizado com sucesso",
-      token: "token"
+      token
     }
 
     return output
